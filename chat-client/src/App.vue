@@ -28,14 +28,13 @@ onBeforeMount(() => {
 });
 
 const sendMessage = () => {
-  socket.emit('createMessage', { text: messageText.value }, (response) => {
-    // messages.value.push(response);
+  socket.emit('createMessage', { text: messageText.value }, () => {
     messageText.value = '';
   });
 };
 
 const join = () => {
-  socket.emit('join', { name: name.value }, (response) => {
+  socket.emit('join', { name: name.value }, () => {
     joined.value = true;
   });
 };

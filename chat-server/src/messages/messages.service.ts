@@ -5,10 +5,12 @@ import { Message } from './entities/message.entity';
 @Injectable()
 export class MessagesService {
   messages: Message[] = [{ name: 'Tan', text: 'heyooo' }];
-  clientToUser: {};
+  clientToUser = {};
 
   identify(name: string, clientId: string) {
     this.clientToUser[clientId] = name;
+
+    return Object.values(this.clientToUser);
   }
 
   getClientName(clientId: string) {
