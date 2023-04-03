@@ -1,13 +1,14 @@
 import {
-  WebSocketGateway,
-  SubscribeMessage,
+  ConnectedSocket,
   MessageBody,
+  SubscribeMessage,
+  WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
-import { MessagesService } from './messages.service';
+import { Server, Socket } from 'socket.io';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { Message } from './entities/message.entity';
-import { Server } from 'socket.io';
+import { MessagesService } from './messages.service';
 
 @WebSocketGateway({
   cors: {
@@ -36,7 +37,12 @@ export class MessagesGateway {
   }
 
   @SubscribeMessage('join')
-  joinRoom() {}
+  joinRoom(
+    @MessageBody('name') name: string,
+    @ConnectedSocket() client: Socket,
+  ) {
+    return this.messagesService.identify(name, client.id);
+  }
 
   @SubscribeMessage('typing')
   async typing() {}

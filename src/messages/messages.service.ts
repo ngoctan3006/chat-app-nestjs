@@ -5,6 +5,15 @@ import { Message } from './entities/message.entity';
 @Injectable()
 export class MessagesService {
   messages: Message[] = [{ name: 'Tan', text: 'heyooo' }];
+  clientToUser: {};
+
+  identify(name: string, clientId: string) {
+    this.clientToUser[clientId] = name;
+  }
+
+  getClientName(clientId: string) {
+    return this.clientToUser[clientId];
+  }
 
   async create(createMessageDto: CreateMessageDto): Promise<Message> {
     const message = { ...createMessageDto };
