@@ -15,8 +15,14 @@ export class MessagesService {
     return this.clientToUser[clientId];
   }
 
-  async create(createMessageDto: CreateMessageDto): Promise<Message> {
-    const message = { ...createMessageDto };
+  async create(
+    createMessageDto: CreateMessageDto,
+    clientId: string,
+  ): Promise<Message> {
+    const message = {
+      name: this.clientToUser[clientId],
+      text: createMessageDto.text,
+    };
     this.messages.push(message);
     return message;
   }
