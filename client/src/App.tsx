@@ -1,12 +1,13 @@
 import React from 'react';
+import { Outlet, Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { RegisterPage } from './pages';
 
 const App: React.FC = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<div>Home</div>} />
+        <Route path="/" element={<RegisterPage />} />
         <Route
           path="/conversations"
           element={
